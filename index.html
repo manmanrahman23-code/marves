@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GarmentOS — Production Dashboard</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon"><span>G</span></div>
+    <div>
+      <div class="brand-name">GarmentOS</div>
+      <div class="brand-sub">Production Suite</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Main</div>
+    <a href="#" class="nav-item active" data-page="dashboard">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Production dashboard
+    </a>
+    <a href="#" class="nav-item" data-page="fabric">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l1 12h12l1-12"/><path d="M2 8h20"/><path d="M9 8V5a3 3 0 016 0v3"/></svg>
+      Fabric receipt
+    </a>
+    <a href="#" class="nav-item" data-page="inventory">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3"/><path d="M1 8h22v13a2 2 0 01-2 2H3a2 2 0 01-2-2z"/><path d="M10 12h4"/></svg>
+      Inventory
+    </a>
+    <div class="nav-group-label">Workflow</div>
+    <a href="#" class="nav-item" data-page="cutting">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+      Cutting room
+    </a>
+    <a href="#" class="nav-item" data-page="reports">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+      Reports
+    </a>
+    <div class="nav-group-label">System</div>
+    <a href="#" class="nav-item" data-page="settings">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="operator-info">
+      <div class="operator-avatar">BS</div>
+      <div>
+        <div class="operator-name">Budi Santoso</div>
+        <div class="operator-role">Operator · Line 3</div>
+      </div>
+    </div>
+    <div class="shift-badge">Shift A</div>
+  </div>
+</aside>
+
+<!-- MOBILE OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- MAIN CONTENT -->
+<div class="layout-main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" id="menuToggle" onclick="toggleSidebar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="page-title" id="pageTitle">Production dashboard</div>
+    </div>
+    <div class="topbar-right">
+      <div class="live-badge">
+        <span class="pulse-dot"></span>
+        Live
+      </div>
+      <div class="topbar-time" id="clockDisplay">--:-- WIB</div>
+      <div class="topbar-date" id="dateDisplay">--</div>
+    </div>
+  </header>
+
+  <!-- PAGE: DASHBOARD -->
+  <main class="page-content" id="page-dashboard">
+
+    <!-- STAT CARDS -->
+    <section class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon blue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-rolls">142</div>
+          <div class="stat-label">Rolls in stock</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon green">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-spk">7</div>
+          <div class="stat-label">Active SPK</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon amber">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-pieces">4,820</div>
+          <div class="stat-label">Pieces cut today</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon red">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="stat-body">
+          <div class="stat-value" id="stat-hold">3</div>
+          <div class="stat-label">Rolls on hold</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- LEFT: FABRIC RECEIPT -->
+      <div class="col-left">
+
+        <!-- SHIPMENT FORM -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16,8 20,8 23,11 23,16 16,16 16,8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              New shipment batch
+            </div>
+          </div>
+          <div class="card-body">
+            <form id="shipmentForm" onsubmit="registerBatch(event)">
+              <div class="form-row">
+                <div class="form-field full">
+                  <label>Supplier</label>
+                  <select id="f-supplier">
+                    <option value="">— Pilih supplier —</option>
+                    <option selected>PT Batik Keris Tekstil</option>
+                    <option>CV Maju Makmur Fabrics</option>
+                    <option>Indo Textile Corp</option>
+                    <option>PT Sinar Jaya Fabrics</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-field">
+                  <label>PO number</label>
+                  <input type="text" id="f-po" value="PO-2026-0841" placeholder="PO-YYYY-XXXX" />
+                </div>
+                <div class="form-field">
+                  <label>Tanggal terima</label>
+                  <input type="date" id="f-date" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-field">
+                  <label>Jenis kain</label>
+                  <select id="f-fabric">
+                    <option selected>Cotton Poplin 40s</option>
+                    <option>Polyester Twill</option>
+                    <option>Rayon Challis</option>
+                    <option>Denim 12oz</option>
+                    <option>Linen Mix</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label>Kode warna</label>
+                  <input type="text" id="f-color" value="NVY-204" placeholder="e.g. BLK-001" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-field">
+                  <label>Jumlah roll</label>
+                  <input type="number" id="f-rolls" value="12" min="1" />
+                </div>
+                <div class="form-field">
+                  <label>Berat/roll (kg)</label>
+                  <input type="number" id="f-weight" value="24.5" step="0.1" />
+                </div>
+              </div>
+              <div class="form-row two-col">
+                <div class="form-field">
+                  <label>Panjang/roll (yds)</label>
+                  <input type="number" id="f-length" value="148" step="0.5" />
+                </div>
+                <div class="form-field">
+                  <label>QC status</label>
+                  <select id="f-qc">
+                    <option value="pass">Pass</option>
+                    <option value="pending" selected>Pending</option>
+                    <option value="hold">Hold</option>
+                    <option value="fail">Fail</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-qr" onclick="simulateQR()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5"/><rect x="16" y="3" width="5" height="5"/><rect x="3" y="16" width="5" height="5"/><rect x="10" y="3" width="2" height="2"/><rect x="10" y="10" width="2" height="2"/><rect x="16" y="10" width="5" height="2"/><rect x="10" y="16" width="2" height="5"/><rect x="16" y="16" width="2" height="5"/></svg>
+                  Scan QR
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                  Daftarkan batch
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: ACTIVE ROLL LIST -->
+      <div class="col-right">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Active roll list
+            </div>
+            <div class="card-actions">
+              <input type="text" id="rollSearch" class="search-input" placeholder="Cari roll…" oninput="filterRolls()" />
+              <select id="qcFilter" onchange="filterRolls()" class="filter-select">
+                <option value="">Semua status</option>
+                <option value="pass">Pass</option>
+                <option value="hold">Hold</option>
+                <option value="fail">Fail</option>
+                <option value="pending">Pending</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="rollTable">
+              <thead>
+                <tr>
+                  <th>Roll ID</th>
+                  <th>Jenis kain</th>
+                  <th>Warna</th>
+                  <th>Batch</th>
+                  <th>Brt (kg)</th>
+                  <th>Pjg (yds)</th>
+                  <th>QC</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="rollTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM GRID: CUTTING WORKFLOW -->
+    <div class="bottom-grid">
+
+      <!-- JOB QUEUE -->
+      <div class="col-queue">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              Cutting job queue
+            </div>
+            <button class="btn btn-sm" onclick="showNewSPKModal()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New SPK
+            </button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="spkTable">
+              <thead>
+                <tr>
+                  <th>No. SPK</th>
+                  <th>Style / Order</th>
+                  <th>Deadline</th>
+                  <th>Qty</th>
+                  <th>Progress</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="spkTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE JOB DETAIL -->
+      <div class="col-detail">
+        <div class="card active-job-card" id="activeJobCard">
+          <div class="active-job-banner">
+            <div class="active-job-label">Active cutting job</div>
+            <div class="active-job-spk" id="aj-spk">SPK-1041</div>
+            <div class="active-job-meta" id="aj-meta">Men's oxford shirt · 600 pcs</div>
+            <div class="active-job-roll" id="aj-roll">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              Roll: <span id="aj-roll-ids">RL-00841 / RL-00842</span>
+            </div>
+          </div>
+
+          <div class="card-body consumption-body">
+            <div class="consumption-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+              Input konsumsi
+            </div>
+
+            <div class="consumption-grid">
+              <div class="form-field">
+                <label>Berat terpakai</label>
+                <div class="input-unit">
+                  <input type="number" id="c-weight" value="18.4" step="0.1" oninput="updateEfficiency()" />
+                  <span class="unit">kg</span>
+                </div>
+              </div>
+              <div class="form-field">
+                <label>Waste / sisa</label>
+                <div class="input-unit">
+                  <input type="number" id="c-waste" value="1.2" step="0.1" oninput="updateEfficiency()" />
+                  <span class="unit">kg</span>
+                </div>
+              </div>
+              <div class="form-field">
+                <label>Potongan (pcs)</label>
+                <div class="input-unit">
+                  <input type="number" id="c-pieces" value="432" oninput="updateEfficiency()" />
+                  <span class="unit">pcs</span>
+                </div>
+              </div>
+              <div class="form-field">
+                <label>Jumlah ply</label>
+                <div class="input-unit">
+                  <input type="number" id="c-ply" value="40" />
+                  <span class="unit">ply</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="efficiency-box">
+              <div class="eff-row">
+                <span>Efisiensi bahan</span>
+                <span class="eff-val green" id="eff-pct">93.9%</span>
+              </div>
+              <div class="eff-bar-wrap">
+                <div class="eff-bar" id="eff-bar" style="width:93.9%"></div>
+              </div>
+              <div class="eff-row" style="margin-top:6px">
+                <span>Waste ratio</span>
+                <span class="eff-val amber" id="waste-pct">6.1%</span>
+              </div>
+              <div class="eff-row" style="margin-top:4px">
+                <span>Pcs / kg</span>
+                <span class="eff-val blue" id="pcs-per-kg">23.5</span>
+              </div>
+            </div>
+
+            <div class="big-actions">
+              <button class="btn btn-finish" onclick="finishJob()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></svg>
+                Finish cutting job
+              </button>
+              <button class="btn btn-labels" onclick="generateLabels()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                Generate labels
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- MODAL: NEW SPK -->
+<div class="modal-overlay" id="spkModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Buat SPK baru</h2>
+      <button class="modal-close" onclick="closeModal('spkModal')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row two-col">
+        <div class="form-field">
+          <label>No. SPK</label>
+          <input type="text" id="m-spk" placeholder="SPK-XXXX" />
+        </div>
+        <div class="form-field">
+          <label>No. Order</label>
+          <input type="text" id="m-order" placeholder="ORD-XXX-XXXX" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full">
+          <label>Nama style</label>
+          <input type="text" id="m-style" placeholder="e.g. Men's polo shirt" />
+        </div>
+      </div>
+      <div class="form-row two-col">
+        <div class="form-field">
+          <label>Target qty (pcs)</label>
+          <input type="number" id="m-qty" placeholder="500" />
+        </div>
+        <div class="form-field">
+          <label>Deadline</label>
+          <input type="date" id="m-deadline" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('spkModal')">Batal</button>
+      <button class="btn btn-primary" onclick="addSPK()">Buat SPK</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ROLL DETAIL -->
+<div class="modal-overlay" id="rollModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Detail roll — <span id="modal-roll-id"></span></h2>
+      <button class="modal-close" onclick="closeModal('rollModal')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="rollModalBody"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('rollModal')">Tutup</button>
+      <button class="btn btn-primary" onclick="assignRoll()">Assign ke SPK aktif</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
